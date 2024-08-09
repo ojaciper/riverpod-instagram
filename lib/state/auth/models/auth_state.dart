@@ -17,6 +17,7 @@ class AuthState {
       : result = null,
         isLoading = false,
         userId = null;
+
   AuthState copiedWithIsloading(bool isLoading) => AuthState(
         result: result,
         isLoading: isLoading,

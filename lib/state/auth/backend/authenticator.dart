@@ -6,6 +6,7 @@ import 'package:instantgram_clone/state/auth/models/auth_result.dart';
 import 'package:instantgram_clone/state/posts/typedefs/user_id.dart';
 
 class Authenticator {
+  const Authenticator();
   UserId? get userId => FirebaseAuth.instance.currentUser?.uid;
   bool get isAlreadyLoggedIn => userId != null;
   String get displayName =>
