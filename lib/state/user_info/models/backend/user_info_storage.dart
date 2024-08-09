@@ -20,7 +20,7 @@ class UserInfoStorage {
           .limit(1)
           .get();
 
-      if (userInfo.docs.isEmpty) {
+      if (userInfo.docs.isNotEmpty) {
         await userInfo.docs.first.reference.update({
           FirebaseFieldName.displayName: displayName,
           FirebaseFieldName.email: email ?? '',

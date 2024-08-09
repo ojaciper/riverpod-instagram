@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:instantgram_clone/main.dart';
 import 'package:instantgram_clone/state/auth/constants/constants.dart';
 import 'package:instantgram_clone/state/auth/models/auth_result.dart';
 import 'package:instantgram_clone/state/posts/typedefs/user_id.dart';
@@ -25,13 +27,14 @@ class Authenticator {
   Future<AuthResult> loginWithFacebook() async {
     final loginResult = await FacebookAuth.instance.login();
     final token = loginResult.accessToken?.tokenString;
-    if (token == null) {
-      // user has aborted the loggin process
-      return AuthResult.aborted;
-    }
-    // user contune with loggin process
-    final oauthCredential = FacebookAuthProvider.credential(token);
+
     try {
+      if (token == null) {
+        // user has aborted the loggin process
+        return AuthResult.aborted;
+      }
+      // user contune with loggin process
+      final oauthCredential = FacebookAuthProvider.credential(token);
       await FirebaseAuth.instance.signInWithCredential(oauthCredential);
       return AuthResult.success;
     } on FirebaseAuthException catch (error) {
@@ -40,9 +43,15 @@ class Authenticator {
       if (error.code == Constants.accountExistsWithDifferentCredential &&
           email != null &&
           credential != null) {
-        final provider =
-            await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-        if (provider.contains(Constants.googleCom)) {
+        // checking if a user already exist with them same email
+        final query = await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: email)
+            .get();
+        // final provider =
+        //     await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+        if (query.docs.isNotEmpty) {
+          print("this code is working");
           await loginWithGoogle();
           FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
         }

@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:instantgram_clone/main.dart';
 import 'package:instantgram_clone/state/auth/backend/authenticator.dart';
 import 'package:instantgram_clone/state/auth/models/auth_result.dart';
 import 'package:instantgram_clone/state/auth/models/auth_state.dart';
@@ -40,16 +41,21 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 
   Future<void> loginWithFacebook() async {
     state = state.copiedWithIsloading(true);
+
     final result = await _authenticator.loginWithFacebook();
-    final userId = _authenticator.userId;
-    if (result == AuthResult.success && _authenticator.userId != null) {
-      await saveUserInfo(userId: userId!);
+    if (result == AuthResult.success) {
+      final userId = _authenticator.userId;
+      if (result == AuthResult.success && _authenticator.userId != null) {
+        await saveUserInfo(userId: userId!);
+      }
+      state = AuthState(
+        result: AuthResult.success,
+        isLoading: false,
+        userId: userId,
+      );
+    } else {
+      result.log();
     }
-    state = AuthState(
-      result: AuthResult.success,
-      isLoading: false,
-      userId: userId,
-    );
   }
 
   Future<void> saveUserInfo({required UserId userId}) =>
