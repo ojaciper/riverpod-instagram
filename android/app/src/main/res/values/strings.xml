@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">1040396561038396</string>
+    <string name="fb_login_protocol_scheme">fb1040396561038396</string>
+    <string name="facebook_client_token">f43ad56df2579621fe135f00803d6f9c</string>
+    <string name="app_name">instant clone</string>
+</resources>

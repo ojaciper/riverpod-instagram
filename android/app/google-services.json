@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "932640071906",
+    "project_id": "instagram-play-osas",
+    "storage_bucket": "instagram-play-osas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932640071906:android:34faa6e194136a0e2c3ebb",
+        "android_client_info": {
+          "package_name": "com.example.instantgram_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932640071906-5dnmfsia5mublvmuom36bri7k1miksvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instantgram_clone",
+            "certificate_hash": "95d0a3f1922f8a1137df8f7226117ed9ae713827"
+          }
+        },
+        {
+          "client_id": "932640071906-fqjijphp53bfer14obgf75oavd4kp47k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtcPpVq_HhAdMW-igz3NXyDOMhu_GqyhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932640071906-fqjijphp53bfer14obgf75oavd4kp47k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
