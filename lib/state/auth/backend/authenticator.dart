@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:instantgram_clone/main.dart';
 import 'package:instantgram_clone/state/auth/constants/constants.dart';
 import 'package:instantgram_clone/state/auth/models/auth_result.dart';
 import 'package:instantgram_clone/state/posts/typedefs/user_id.dart';
@@ -51,7 +50,6 @@ class Authenticator {
         // final provider =
         //     await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
         if (query.docs.isNotEmpty) {
-          print("this code is working");
           await loginWithGoogle();
           FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
         }
