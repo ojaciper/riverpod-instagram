@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instantgram_clone/firebase_options.dart';
 import 'dart:developer' as devtools show log;
-
-import 'package:instantgram_clone/state/auth/backend/authenticator.dart';
 import 'package:instantgram_clone/state/auth/providers/auth_state_provider.dart';
 import 'package:instantgram_clone/state/auth/providers/is_logged_in_provider.dart';
+import 'package:instantgram_clone/state/provider/is_loading_provider.dart';
 import 'package:instantgram_clone/views/components/loading/loading_screen.dart';
 
 extension Log on Object {
@@ -46,8 +45,16 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Consumer(builder: (context, ref, child) {
+        ref.listen<bool>(isLoadingProvider, (_, isLoading) {
+          if (isLoading) {
+            LoadingScreen.instance().show(context: context);
+            print(isLoading);
+          } else {
+            LoadingScreen.instance().hide();
+            print(isLoading);
+          }
+        });
         final isLoggedIn = ref.watch(isLoggedInProvider);
-        isLoggedIn.log();
         if (isLoggedIn) {
           return const MainView();
         } else {

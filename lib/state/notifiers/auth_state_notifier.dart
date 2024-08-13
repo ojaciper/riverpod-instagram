@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:instantgram_clone/main.dart';
 import 'package:instantgram_clone/state/auth/backend/authenticator.dart';
 import 'package:instantgram_clone/state/auth/models/auth_result.dart';
 import 'package:instantgram_clone/state/auth/models/auth_state.dart';
@@ -54,7 +53,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
         userId: userId,
       );
     } else {
-      result.log();
+      // result.log();
     }
   }
 
