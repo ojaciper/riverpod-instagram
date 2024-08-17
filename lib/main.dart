@@ -7,6 +7,7 @@ import 'package:instantgram_clone/state/auth/providers/auth_state_provider.dart'
 import 'package:instantgram_clone/state/auth/providers/is_logged_in_provider.dart';
 import 'package:instantgram_clone/state/provider/is_loading_provider.dart';
 import 'package:instantgram_clone/views/components/loading/loading_screen.dart';
+import 'package:instantgram_clone/views/login/Login_view.dart';
 
 extension Log on Object {
   void log() => devtools.log(toString());
@@ -84,38 +85,6 @@ class MainView extends StatelessWidget {
           ),
         );
       })),
-    );
-  }
-}
-
-class LoginView extends ConsumerWidget {
-  const LoginView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, ref) {
-    final authStateNotifier = ref.read(authStateProvider.notifier);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Login View"),
-      ),
-      body: Column(
-        children: [
-          TextButton(
-            onPressed: () async {
-              await authStateNotifier.loginWithGoogle();
-            },
-            child: const Text("Signin with Google"),
-          ),
-          TextButton(
-            onPressed: () async {
-              await authStateNotifier.loginWithFacebook();
-            },
-            child: const Text("Signin with Facebook"),
-          ),
-        ],
-      ),
     );
   }
 }
