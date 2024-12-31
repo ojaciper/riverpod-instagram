@@ -47,7 +47,6 @@ class Authenticator {
             .collection('users')
             .where('email', isEqualTo: email)
             .get();
-        print(query.docs);
         // final provider =
         //     await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
         if (query.docs.isNotEmpty) {

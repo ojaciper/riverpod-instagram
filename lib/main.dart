@@ -49,10 +49,8 @@ class MyApp extends StatelessWidget {
         ref.listen<bool>(isLoadingProvider, (_, isLoading) {
           if (isLoading) {
             LoadingScreen.instance().show(context: context);
-            print(isLoading);
           } else {
             LoadingScreen.instance().hide();
-            print(isLoading);
           }
         });
         final isLoggedIn = ref.watch(isLoggedInProvider);
@@ -81,7 +79,7 @@ class MainView extends StatelessWidget {
             onPressed: () async {
               await ref.read(authStateProvider.notifier).logOut();
             },
-            child: const Text("Logout"),
+            child: const Text("logout"),
           ),
         );
       })),
