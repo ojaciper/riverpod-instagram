@@ -25,7 +25,7 @@ class UserPostsView extends ConsumerWidget {
         } else {
           return const Text('');
         }
-      }, error: (error, stackTrace) {
+      },error: (error, stackTrace) {
         return const ErrorAnimation();
       }, loading: () {
         return const LoadingAnimation();

@@ -13,10 +13,13 @@ class Strings {
       'Are you sure your want to delete this';
 
   //log out
-  static const logout = 'Log out';
+  static const logOut = 'Log out';
   static const areYouSureYouWantToLogOutFromThisApp =
       'Are you sure you want to log out from the app?';
   static const cancel = 'Cancel';
+
+  static const areYouSureThatYouWantToLogOutOfTheApp =
+      'are you sure you want to logOut of the app';
 
   const Strings._();
 }
