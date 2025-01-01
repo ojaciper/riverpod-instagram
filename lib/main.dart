@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instantgram_clone/firebase_options.dart';
 import 'dart:developer' as devtools show log;
-import 'package:instantgram_clone/state/auth/providers/auth_state_provider.dart';
 import 'package:instantgram_clone/state/auth/providers/is_logged_in_provider.dart';
 import 'package:instantgram_clone/state/provider/is_loading_provider.dart';
 import 'package:instantgram_clone/views/components/loading/loading_screen.dart';
 import 'package:instantgram_clone/views/login/Login_view.dart';
+import 'package:instantgram_clone/views/main/main_view.dart';
 
 extension Log on Object {
   void log() => devtools.log(toString());
@@ -64,25 +64,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainView extends StatelessWidget {
-  const MainView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Main View"),
-      ),
-      body: Center(child: Consumer(builder: (context, ref, child) {
-        return Center(
-          child: TextButton(
-            onPressed: () async {
-              await ref.read(authStateProvider.notifier).logOut();
-            },
-            child: const Text("logout"),
-          ),
-        );
-      })),
-    );
-  }
-}
+// class MainView extends StatelessWidget {
+//   const MainView({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Main View"),
+//       ),
+//       body: Center(child: Consumer(builder: (context, ref, child) {
+//         return Center(
+//           child: TextButton(
+//             onPressed: () async {
+//               await ref.read(authStateProvider.notifier).logOut();
+//             },
+//             child: const Text("logout"),
+//           ),
+//         );
+//       })),
+//     );
+//   }
+// }

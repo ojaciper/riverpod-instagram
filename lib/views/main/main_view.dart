@@ -45,18 +45,18 @@ class _MainViewState extends ConsumerState<MainView> {
               icon: const Icon(Icons.logout_outlined),
             )
           ],
+          bottom: const TabBar(tabs: [
+            Tab(
+              icon: Icon(Icons.person),
+            ),
+            Tab(
+              icon: Icon(Icons.search),
+            ),
+            Tab(
+              icon: Icon(Icons.home),
+            ),
+          ]),
         ),
-        bottomSheet: const TabBar(tabs: [
-          Tab(
-            icon: Icon(Icons.person),
-          ),
-          Tab(
-            icon: Icon(Icons.search),
-          ),
-          Tab(
-            icon: Icon(Icons.home),
-          ),
-        ]),
         body: const TabBarView(children: [
           UserPostsView(),
           UserPostsView(),
