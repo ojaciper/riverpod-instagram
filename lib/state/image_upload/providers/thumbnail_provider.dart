@@ -36,6 +36,9 @@ final thumbnailProvider =
         break;
     }
     final aspectRatio = await image.getAspectRatio();
-    return ImageWithAspectRatio(image: image, aspectRatio: aspectRatio);
+    return ImageWithAspectRatio(
+      image: image,
+      aspectRatio: aspectRatio,
+    );
   },
 );
