@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image/image.dart' as img;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:instantgram_clone/state/constants/firebase_collection_name.dart';
 import 'package:instantgram_clone/state/image_upload/extension/get_collection_name_from_file_type.dart';
+import 'package:instantgram_clone/state/posts/models/post_payload.dart';
 import 'package:uuid/uuid.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instantgram_clone/state/image_upload/constant/constants.dart';
@@ -74,10 +76,44 @@ class ImageUploadNotifier extends StateNotifier<IsLoading> {
         .child(userId)
         .child(FirebaseCollectionName.thumbnails)
         .child(fileName);
+
     final originalFileRef = FirebaseStorage.instance
         .ref()
         .child(userId)
         .child(fileType.collectionName)
         .child(fileName);
+
+    try {
+      final thumbnailUpLoadTask =
+          await thumbnailRef.putData(thumbnailUint8List);
+      final thumbnailStorageId = thumbnailUpLoadTask.ref.name;
+
+      // upload the original file
+      final originalFileUploadTask = await originalFileRef.putFile(file);
+      final originalFileStorageId = originalFileUploadTask.ref.name;
+
+      // upload the post itself
+      final postPayLoad = PostPayload(
+        userId: userId,
+        message: message,
+        thumbnailUrl: await thumbnailRef.getDownloadURL(),
+        fileUrl: await originalFileRef.getDownloadURL(),
+        fileType: fileType,
+        aspectRatio: thumbnailAspectRatio,
+        thumbnailStorageId: thumbnailStorageId,
+        originalFileStorageId: originalFileStorageId,
+        postSettings: postSettings,
+      );
+
+      await FirebaseFirestore.instance
+          .collection(FirebaseCollectionName.posts)
+          .add(postPayLoad);
+
+      return true;
+    } catch (_) {
+      return false;
+    } finally {
+      isLoading = false;
+    }
   }
 }
